@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yeter La - Gençlik İnisiyatifi
 
-## Getting Started
+Bu repo, "Yeter La" inisiyatifinin web tarafındaki kayıt ve yönlendirme platformunu barındırır. Basit, net ve hızlı olması için kurguladık. Örgütlenmek isteyenlerin hızlıca şehir seçip kendi bölgelerindeki gruplara dahil olmasını sağlıyor.
 
-First, run the development server:
+Projeyi açık kaynak yapma amacımız gayet basit: Saklayacak hiçbir şeyimiz yok, her şey şeffaf ve ortada. Kodlar nasıl çalışıyor, arka planda ne var, isteyen açıp bakabilir.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Teknoloji Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework**: Next.js (App Router kullanıyoruz)
+- **Stil**: Tailwind CSS (biraz agresif ve brutalist tasarım)
+- **Animasyonlar**: Framer Motion
+- **Database/Backend**: Supabase (Kayıt olan üyeleri ve sayacı tutuyoruz)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Lokal Kurulum
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Projeyi kendi bilgisayarında çalıştırıp incelemek istersen şu adımları izleyebilirsin:
 
-## Learn More
+1. **Repoyu klonla ve paketleri kur:**
+   ```bash
+   git clone <repo-url>
+   cd yeter-la
+   npm install
+   # veya pnpm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Çevre (Env) Değişkenleri:**
+   Proje dizininde bir `.env.local` dosyası oluşturman lazım. İçine şu değişkenleri eklemelisin:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=senin_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=senin_anon_key
+   ```
+   Eğer elinde bir Supabase projesi yoksa sorun değil; sistem bu değişkenleri bulamadığında otomatik olarak "mock" bir client ile çalışır, hata vermez. UI tarafını rahatça test edebilirsin.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Geliştirme Ortamını Başlat:**
+   ```bash
+   npm run dev
+   ```
+   Ve `http://localhost:3000` adresinden sayfaya girebilirsin.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Katkıda Bulunmak İstersen
 
-## Deploy on Vercel
+Platformu iyileştirecek her türlü PR'a kapımız açık. Mimarileri baştan yazmaya, kodları fazla kasmaya gerek yok; çalışan, sade ve anlaşılır çözümler yeterli.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Bir hata bulursan (bug vs.) çekinmeden Issue açabilirsin.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Güvenlik Notu
+
+`.env` gibi dosyalar zaten gitignore içinde ekli, hiçbir zaman kendi API key'lerinle commit atma lütfen. Ayrıca Supabase tarafını canlıya alırken RLS (Row Level Security) ayarlarını düzgün yapılandırdığına emin ol ki dışarıdan izinsiz müdahalelere açık kalmasın.

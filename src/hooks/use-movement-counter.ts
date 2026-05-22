@@ -13,9 +13,9 @@ export function useMovementCounter(initialValue: number = 5732) {
     let timeoutId: NodeJS.Timeout;
 
     const scheduleNextIncrement = () => {
-      // Random interval between 30 seconds and 3 minutes
-      const minDelay = 30 * 1000;
-      const maxDelay = 180 * 1000;
+      // Random interval between 8 minutes and 12 minutes (averaging 10 minutes)
+      const minDelay = 8 * 60 * 1000;
+      const maxDelay = 12 * 60 * 1000;
       const randomDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
 
       timeoutId = setTimeout(() => {

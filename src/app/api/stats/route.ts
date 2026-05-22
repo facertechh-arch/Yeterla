@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
-// reference date: 2026-05-22T17:00:00+03:00 (1779458400000 ms)
+// referans zamanı: 2026-05-22T17:00:00+03:00
 const REFERENCE_TIME = 1779458400000;
 const BASE_COUNT = 5732;
-const INCREMENT_INTERVAL_MS = 25000; // 1 count every 25 seconds
+const INCREMENT_INTERVAL_MS = 600000; // 10 dakikada 1 artış
 
 function getSimulatedCount(): number {
   const elapsed = Date.now() - REFERENCE_TIME;
@@ -21,29 +21,29 @@ export async function GET() {
       .single();
 
     if (error || !data) {
-      // Fallback silently to simulated time-based counter if table/row does not exist
+      // Tablo yoksa simüle edilen sayacı dön
       return NextResponse.json({ counter: getSimulatedCount() });
     }
 
     return NextResponse.json({ counter: Number(data.counter) });
   } catch {
-    // Fallback to simulated counter on any network or database exception
+    // Herhangi bir ağ/veritabanı hatasında simülasyona dön
     return NextResponse.json({ counter: getSimulatedCount() });
   }
 }
 
 export async function POST() {
   try {
-    // Attempt to increment in Supabase
+    // Supabase'de artırmayı dene
     const { error } = await supabase.rpc("increment_counter");
 
     if (error) {
-      // If RPC fails (e.g. not created yet), attempt to direct update or fallback
+      // RPC çalışmazsa (mesela fonksiyon yoksa) simüle edilen değerle devam et
       const currentSimulated = getSimulatedCount();
       return NextResponse.json({ success: true, counter: currentSimulated + 1 });
     }
 
-    // Return the updated count from DB if possible, or fallback
+    // Mümkünse DB'den dönen sayacı al, yoksa simülasyondan devam
     const { data: fetchResult } = await supabase
       .from("stats")
       .select("counter")

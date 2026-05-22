@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2, Send, CheckCircle2, ChevronDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
-// Google Fonts - Aggressive headings & clean tech fonts
+// Fontlar
 const bebasNeue = Bebas_Neue({
   weight: "400",
   subsets: ["latin"],
@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-// 10 Regional Telegram Group Invite URLs
+// Bölgesel Telegram linkleri
 const REGIONAL_GROUPS = {
   istanbul: "https://t.me/+ZeXtc-FvDTk4NWE8",
   ankara: "https://t.me/+pj6X7diqgEAyOTA0",
@@ -32,7 +32,7 @@ const REGIONAL_GROUPS = {
   guneydoguanadolu: "https://t.me/+ndEM9-tD771jNmE8",
 };
 
-// Mapping all 81 cities to regions
+// Şehir - Bölge eşleşmeleri
 const CITY_TO_REGION: Record<string, keyof typeof REGIONAL_GROUPS> = {
   "İstanbul": "istanbul",
   "Ankara": "ankara",
@@ -131,7 +131,7 @@ const CITY_TO_REGION: Record<string, keyof typeof REGIONAL_GROUPS> = {
   "Siirt": "guneydoguanadolu"
 };
 
-// 81 Turkish cities properly sorted
+// Alfabetik şehir listesi
 const TURKISH_CITIES = Object.keys(CITY_TO_REGION).sort((a, b) =>
   a.localeCompare(b, "tr-TR")
 );
@@ -140,6 +140,7 @@ export default function Home() {
   const [count, setCount] = useState<number | null>(null);
   const [nickname, setNickname] = useState("");
   const [city, setCity] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [kvkkChecked, setKvkkChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
@@ -160,7 +161,7 @@ export default function Home() {
     "SİSTEM BAĞLANTISI GÜVENLİ VE AKTİF!"
   ];
 
-  // Fetch initial synchronized counter silently
+  // Başlangıç sayacını çek
   useEffect(() => {
     const fetchCounter = async () => {
       try {
@@ -173,14 +174,14 @@ export default function Home() {
         }
       } catch (err) {
         setCount(5732);
-        // Fail completely silently to prevent console trace errors
+        // Hata olursa sessizce geç
       }
     };
 
     fetchCounter();
   }, []);
 
-  // Listen to real-time updates from Supabase stats table
+  // Supabase'den canlı güncellemeleri dinle
   useEffect(() => {
     let channel: any;
     if (supabase && typeof supabase.channel === "function") {
@@ -210,7 +211,7 @@ export default function Home() {
     };
   }, []);
 
-  // Trigger +1 animation when count increases
+  // Sayı artınca animasyon tetikle
   useEffect(() => {
     if (count !== null) {
       if (prevCountRef.current !== null && count > prevCountRef.current) {
@@ -224,7 +225,7 @@ export default function Home() {
     }
   }, [count]);
 
-  // Secret code keyboard listener
+  // Gizli menü için klavye dinleyicisi
   useEffect(() => {
     let keys = "";
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -241,7 +242,7 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Fetch secret members when showSecretList is true
+  // Gizli menü açılınca üyeleri listele
   useEffect(() => {
     if (showSecretList) {
       const fetchMembers = async () => {
@@ -276,21 +277,21 @@ export default function Home() {
     }
   }, [showSecretList]);
 
-  // Periodic random sync incrementer (min 10s, max 5m = 300s)
+  // Sayaç için ufak bi interval (ortalama 10 dk)
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
     const runSyncIncrement = () => {
-      const minDelay = 10 * 1000;
-      const maxDelay = 300 * 1000;
+      const minDelay = 8 * 60 * 1000; // 8 minutes
+      const maxDelay = 12 * 60 * 1000; // 12 minutes
       const randomDelay = Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
 
       timeoutId = setTimeout(async () => {
-        // Optimistic UI update instantly reflecting simulated growth
+        // UI'ı anında güncelle
         setCount((prev) => (prev !== null ? prev + 1 : prev));
 
         try {
-          // Sync with database silently
+          // Arka planda db'ye yaz
           await fetch("/api/stats", { method: "POST" });
         } catch (err) {
           // Fail silently
@@ -317,12 +318,21 @@ export default function Home() {
       setShowSecretList(true);
       return;
     }
-    if (!nickname || !city || !kvkkChecked) return;
+    const cleanNickname = nickname.trim();
+    if (!cleanNickname || !city || !kvkkChecked) return;
 
+    // Hızlı girdi doğrulaması (Sunucuyla uyumlu güvenlik filtresi)
+    const NICKNAME_REGEX = /^[a-zA-Z0-9çÇğĞıİöÖşŞüÜ \-_]+$/;
+    if (cleanNickname.length < 2 || cleanNickname.length > 30 || !NICKNAME_REGEX.test(cleanNickname)) {
+      alert("Takma ad 2 ila 30 karakter uzunluğunda olmalı ve sadece harf, rakam, boşluk, tire (-) veya alt çizgi (_) içermelidir!");
+      return;
+    }
+
+    setNickname(cleanNickname);
     setIsSubmitting(true);
     setLoadingStep(0);
 
-    // Simulated terminal loading logs
+    // Terminal loading efekti
     const interval = setInterval(() => {
       setLoadingStep((prev) => {
         if (prev >= loadingMessages.length - 1) {
@@ -334,19 +344,19 @@ export default function Home() {
     }, 300);
 
     try {
-      // Save data via our API route
+      // Veriyi kaydet
       await fetch("/api/join", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nickname, city }),
+        body: JSON.stringify({ nickname, city, honeypot }),
       });
     } catch (err: any) {
       // Fail completely silently so the client proceeds to success state smoothly
     }
 
-    // Always increment local UI counter and succeed
+    // Sayacı artır ve başarılı dön
     setCount((prev) => (prev !== null ? prev + 1 : prev));
 
     clearInterval(interval);
@@ -513,6 +523,16 @@ export default function Home() {
                 </div>
 
                 <form onSubmit={handleJoin} className="space-y-6">
+                  {/* Bot tuzağı (Honeypot) - Kullanıcıya görünmez */}
+                  <input
+                    type="text"
+                    name="phone_number_optional"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    style={{ display: "none", position: "absolute", opacity: 0 }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
                   {/* Nickname Input */}
                   <div className="space-y-2">
                     <label className={`${bebasNeue.className} text-xl tracking-wider text-white block uppercase`}>
@@ -521,6 +541,7 @@ export default function Home() {
                     <input
                       type="text"
                       required
+                      maxLength={30}
                       value={nickname}
                       onChange={(e) => setNickname(e.target.value)}
                       placeholder="Örn: AsilRebel"
