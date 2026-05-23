@@ -13,15 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yeter La | Şikayet Etmeyi Bırak, Örgütlen!",
-  description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel, örgütlen ve değişimi yerelden başlat.",
-  keywords: ["yeter la", "gençlik inisiyatifi", "örgütlenme", "sivil toplum", "telegram hücreleri", "aktivizm", "değişim", "türkiye gençliği"],
+  title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+  description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
+  keywords: ["yeter la", "gençlik inisiyatifi", "bir araya gelme", "sivil toplum", "telegram hücreleri", "aktivizm", "değişim", "türkiye gençliği"],
   authors: [{ name: "Yeter La İnisiyatifi" }],
   creator: "Yeter La Sivil Gençlik İnisiyatifi",
   publisher: "Yeter La",
   openGraph: {
-    title: "Yeter La | Şikayet Etmeyi Bırak, Örgütlen!",
-    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel, örgütlen ve değişimi yerelden başlat.",
+    title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
     url: "https://yeterla.com",
     siteName: "Yeter La",
     locale: "tr_TR",
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yeter La | Şikayet Etmeyi Bırak, Örgütlen!",
-    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel, örgütlen ve değişimi yerelden başlat.",
+    title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
   },
   robots: {
     index: true,
@@ -51,7 +51,7 @@ const jsonLd = {
   "name": "Yeter La Sivil Gençlik İnisiyatifi",
   "url": "https://yeterla.com",
   "logo": "https://yeterla.com/favicon.ico",
-  "description": "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel, örgütlen ve değişimi yerelden başlat.",
+  "description": "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
   "contactPoint": {
     "@type": "ContactPoint",
     "email": "yeterla@tutamail.com",

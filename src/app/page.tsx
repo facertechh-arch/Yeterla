@@ -453,7 +453,7 @@ export default function Home() {
             </span>
 
             <span className={`${spaceGrotesk.className} text-xs md:text-sm font-bold tracking-widest text-[#FF003C] mt-2 uppercase group-hover:text-white transition-colors duration-300`}>
-              örgütlenen genç / hemen katıl
+              bir araya gel / hemen katıl
             </span>
 
             <motion.div 
@@ -476,7 +476,7 @@ export default function Home() {
           </h1>
           
           <p className={`${spaceGrotesk.className} text-zinc-400 text-lg md:text-xl font-medium max-w-xl mx-auto leading-relaxed`}>
-            Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel, örgütlen ve değişimi yerelden başlat.
+            Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.
           </p>
         </div>
       </div>
@@ -489,8 +489,9 @@ export default function Home() {
           className="inline-block whitespace-nowrap"
         >
           <span>
-            YETER LA • DEĞİŞİMİ BAŞLAT • ŞİKAYET ETMEYİ BIRAK • ÖRGÜTLEN VE BİR ARAYA GEL • &nbsp;
-            YETER LA • DEĞİŞİMİ BAŞLAT • ŞİKAYET ETMEYİ BIRAK • ÖRGÜTLEN VE BİR ARAYA GEL • &nbsp;
+            KORKMA BURADA İLLEGAL BİRŞEY YOK SADECE BİR ARAYA GELİP ÖRGÜTLENİYORUZ • &nbsp;
+            KORKMA BURADA İLLEGAL BİRŞEY YOK SADECE BİR ARAYA GELİP ÖRGÜTLENİYORUZ • &nbsp;
+            KORKMA BURADA İLLEGAL BİRŞEY YOK SADECE BİR ARAYA GELİP ÖRGÜTLENİYORUZ • &nbsp;
           </span>
         </motion.div>
       </div>
@@ -515,7 +516,7 @@ export default function Home() {
               >
                 <div className="mb-8 border-b-2 border-dashed border-zinc-800 pb-6 text-center sm:text-left">
                   <h3 className={`${bebasNeue.className} text-4xl md:text-5xl font-black text-white tracking-wide uppercase`}>
-                    BİR ARAYA GEL // ÖRGÜTLEN
+                    BİR ARAYA GEL
                   </h3>
                   <p className={`${spaceGrotesk.className} text-sm text-zinc-500 mt-1 uppercase font-semibold`}>
                     Takma adını ve şehrini gir, ağa entegre ol.
@@ -682,6 +683,32 @@ export default function Home() {
 
                 {/* Regional Telegram Route Action */}
                 <div className="mt-8 pt-6 border-t-2 border-dashed border-zinc-900 space-y-4">
+                  <div
+                    role="alert"
+                    className="text-left border-4 border-[#FF003C] bg-[#FF003C]/10 p-4 md:p-5 shadow-[4px_4px_0px_0px_#FF003C] ring-2 ring-[#FF003C]/40"
+                  >
+                    <p className={`${bebasNeue.className} text-lg md:text-xl font-black text-[#FF003C] uppercase tracking-wide text-center mb-3`}>
+                      ⚠️ Önemli Uyarı
+                    </p>
+                    <div className={`${spaceGrotesk.className} text-sm md:text-base text-zinc-100 font-semibold leading-relaxed space-y-3`}>
+                      <p className="text-center font-bold text-white">
+                        🚨 GÜVENLİK PROTOKOLÜ: İLK GÖREV 🚨
+                      </p>
+                      <p>
+                        Hoş geldin. Bu grupta pasif izleyici olmak yok, güvenliğini sağlamak var.
+                      </p>
+                      <p className="font-bold text-[#FF003C]">⚠️ HEMEN ŞİMDİ YAPMAN GEREKENLER:</p>
+                      <ul className="space-y-2 list-none pl-0">
+                        <li>⚙️ 1. Telegram Ayarlarına git.</li>
+                        <li>🛡️ 2. Gizlilik ve Güvenlik &gt; Telefon Numarası kısmını kesinlikle &quot;Hiç Kimse&quot; yap.</li>
+                        <li>🎭 3. İsim ve soyismini anonim bir takma adla değiştir.</li>
+                      </ul>
+                      <p className="text-xs md:text-sm text-zinc-300 border-t border-zinc-800 pt-3">
+                        ❗️ Burası bir ağ, ancak kimliğini korumak senin elinde. Bunu yapmayanların sorumluluğu kendine aittir.
+                      </p>
+                    </div>
+                  </div>
+
                   <p className={`${spaceGrotesk.className} text-xs text-[#FF003C] font-extrabold tracking-widest uppercase`}>
                     ŞİMDİ EYLEM ZAMANI
                   </p>

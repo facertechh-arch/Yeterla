@@ -44,9 +44,36 @@ export function JoinForm() {
     return (
       <div className="flex flex-col items-center justify-center p-8 border border-zinc-800 rounded-2xl bg-zinc-900/50 backdrop-blur-sm animate-in fade-in duration-500 w-full max-w-md mx-auto">
         <h3 className="text-xl font-medium text-zinc-100 mb-2">Aramıza Hoş Geldin!</h3>
-        <p className="text-zinc-400 text-sm mb-6 text-center">
+        <p className="text-zinc-400 text-sm mb-4 text-center">
           Bölgendeki diğer gençlerle tanışmak için Telegram grubuna katıl.
         </p>
+
+        <div
+          role="alert"
+          className="w-full mb-6 text-left border-2 border-red-500 bg-red-500/10 p-4 rounded-lg"
+        >
+          <p className="text-sm font-bold text-red-400 text-center mb-3">
+            ⚠️ Önemli Uyarı
+          </p>
+          <div className="text-sm text-zinc-200 space-y-3 leading-relaxed">
+            <p className="text-center font-bold text-white">
+              🚨 GÜVENLİK PROTOKOLÜ: İLK GÖREV 🚨
+            </p>
+            <p>
+              Hoş geldin. Bu grupta pasif izleyici olmak yok, güvenliğini sağlamak var.
+            </p>
+            <p className="font-semibold text-red-400">⚠️ HEMEN ŞİMDİ YAPMAN GEREKENLER:</p>
+            <ul className="space-y-2 list-none">
+              <li>⚙️ 1. Telegram Ayarlarına git.</li>
+              <li>🛡️ 2. Gizlilik ve Güvenlik &gt; Telefon Numarası kısmını kesinlikle &quot;Hiç Kimse&quot; yap.</li>
+              <li>🎭 3. İsim ve soyismini anonim bir takma adla değiştir.</li>
+            </ul>
+            <p className="text-xs text-zinc-400 border-t border-zinc-700 pt-3">
+              ❗️ Burası bir ağ, ancak kimliğini korumak senin elinde. Bunu yapmayanların sorumluluğu kendine aittir.
+            </p>
+          </div>
+        </div>
+
         <a
           href={regionalLink}
           target="_blank"
