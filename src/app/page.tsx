@@ -5,6 +5,9 @@ import { Bebas_Neue, Space_Grotesk } from "next/font/google";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2, Send, CheckCircle2, ChevronDown } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import ManifestoView from "@/components/manifesto-view";
+import ManifestoSheet from "@/components/manifesto-sheet";
 
 // Fontlar
 const bebasNeue = Bebas_Neue({
@@ -139,6 +142,8 @@ const TURKISH_CITIES = Object.keys(CITY_TO_REGION).sort((a, b) =>
 export default function Home() {
   const [count, setCount] = useState<number | null>(null);
   const [nickname, setNickname] = useState("");
+  const [activeMobileTab, setActiveMobileTab] = useState<"join" | "manifesto">("join");
+  const [isManifestoSheetOpen, setIsManifestoSheetOpen] = useState(false);
   const [city, setCity] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [kvkkChecked, setKvkkChecked] = useState(false);
@@ -374,6 +379,56 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-[#FF003C] selection:text-white flex flex-col items-center justify-between relative overflow-hidden">
       
+      {/* Sticky Navigation Header */}
+      <header className="sticky top-0 w-full bg-black/95 backdrop-blur-md border-b border-zinc-900 z-30 select-none">
+        {/* Mobile View: X (Twitter) style tabs */}
+        <div className="flex md:hidden w-full font-mono text-sm font-black">
+          <button
+            onClick={() => setActiveMobileTab("join")}
+            className={`w-1/2 py-4 text-center tracking-widest relative cursor-pointer ${
+              activeMobileTab === "join" ? "text-[#FF003C]" : "text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            KATIL
+            {activeMobileTab === "join" && (
+              <motion.div
+                layoutId="activeTabIndicator"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF003C]"
+              />
+            )}
+          </button>
+          <button
+            onClick={() => setActiveMobileTab("manifesto")}
+            className={`w-1/2 py-4 text-center tracking-widest relative cursor-pointer ${
+              activeMobileTab === "manifesto" ? "text-[#FF003C]" : "text-zinc-500 hover:text-zinc-300"
+            }`}
+          >
+            MANİFESTO
+            {activeMobileTab === "manifesto" && (
+              <motion.div
+                layoutId="activeTabIndicator"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF003C]"
+              />
+            )}
+          </button>
+        </div>
+
+        {/* Desktop View: Sleek top header bar */}
+        <div className="hidden md:flex max-w-5xl mx-auto w-full px-6 py-4 items-center justify-between font-mono">
+          <Link href="/" className="text-xl font-black tracking-widest hover:text-[#FF003C] transition-colors">
+            // YETER LA
+          </Link>
+          <div className="flex items-center gap-6 text-xs font-bold uppercase tracking-wider">
+            <button
+              onClick={() => setIsManifestoSheetOpen(true)}
+              className="px-3 py-1.5 border border-zinc-800 text-zinc-400 hover:text-white hover:border-white transition-all cursor-pointer bg-zinc-950"
+            >
+              MANIFESTO
+            </button>
+          </div>
+        </div>
+      </header>
+
       {/* Brutalist Grid Overlay Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c0c0e_1px,transparent_1px),linear-gradient(to_bottom,#0c0c0e_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none opacity-45" />
 
@@ -381,8 +436,10 @@ export default function Home() {
       <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-[#FF003C]/10 blur-[180px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-15%] right-[-10%] w-[60%] h-[60%] bg-zinc-800/20 blur-[180px] rounded-full pointer-events-none" />
 
-      {/* Hero Section */}
-      <div className="w-full max-w-5xl z-10 px-6 py-12 md:py-24 flex flex-col items-center justify-center text-center space-y-12 flex-1">
+      {/* Wrapper to control responsive view switching */}
+      <div className={activeMobileTab === "join" ? "w-full flex flex-col items-center flex-1 z-10" : "hidden md:flex w-full flex-col items-center flex-1 z-10"}>
+        {/* Hero Section */}
+        <div className="w-full max-w-5xl px-6 py-12 md:py-24 flex flex-col items-center justify-center text-center space-y-12 flex-1">
         
         {/* Massive Pulsing Interactive Circle */}
         <div className="relative flex items-center justify-center mt-6">
@@ -731,6 +788,12 @@ export default function Home() {
           </AnimatePresence>
         </div>
       </section>
+      </div>
+
+      {/* Mobile Manifesto View (only visible on screens < 768px when tab is active) */}
+      <div className={activeMobileTab === "manifesto" ? "w-full max-w-xl px-6 py-12 flex-1 md:hidden z-10" : "hidden"}>
+        <ManifestoView />
+      </div>
 
       {/* Footer */}
       <footer className="w-full z-10 border-t-2 border-white py-8 px-6 bg-[#040405] text-zinc-600 text-center flex flex-col md:flex-row items-center justify-between select-none gap-4">
@@ -743,10 +806,12 @@ export default function Home() {
             href="#" 
             onClick={(e) => {
               e.preventDefault(); 
-              setModalContent({
-                title: "MİSYON & MANİFESTO",
-                text: "Bizi kurtaracak bir ana muhalefet yok. İktidarın bizi sürüklediği o karanlık, sessiz diktatörlüğe girmemize çok az kaldı. Eğer bugün kendi ağımızı kurmazsak, 100 yıllık cumhuriyetin yıkılışını izleyen o korkak nesil biz olacağız."
-              });
+              if (window.innerWidth < 768) {
+                setActiveMobileTab("manifesto");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                setIsManifestoSheetOpen(true);
+              }
             }} 
             className="hover:text-white transition-colors duration-300 text-[#FF003C]"
           >
@@ -861,6 +926,11 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Manifesto Sheet Drawer overlay (Desktop Only) */}
+      <ManifestoSheet isOpen={isManifestoSheetOpen} onClose={() => setIsManifestoSheetOpen(false)}>
+        <ManifestoView />
+      </ManifestoSheet>
     </main>
   );
 }
