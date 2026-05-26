@@ -186,33 +186,30 @@ export default function Home() {
     fetchCounter();
   }, []);
 
-  // Supabase'den canlı güncellemeleri dinle
   useEffect(() => {
-    let channel: any;
-    if (supabase && typeof supabase.channel === "function") {
-      channel = supabase
-        .channel("stats_db_changes")
-        .on(
-          "postgres_changes",
-          {
-            event: "UPDATE",
-            schema: "public",
-            table: "stats",
-            filter: "id=eq.1",
-          },
-          (payload: any) => {
-            if (payload.new && typeof payload.new.counter !== "undefined") {
-              setCount(Number(payload.new.counter));
-            }
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return;
+
+    const channel = supabase
+      .channel(`stats-live-${crypto.randomUUID()}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "stats",
+          filter: "id=eq.1",
+        },
+        (payload: { new: { counter?: number } }) => {
+          const row = payload.new;
+          if (row?.counter !== undefined) {
+            setCount(Number(row.counter));
           }
-        )
-        .subscribe();
-    }
+        }
+      )
+      .subscribe();
 
     return () => {
-      if (channel && supabase && typeof supabase.removeChannel === "function") {
-        supabase.removeChannel(channel);
-      }
+      supabase.removeChannel(channel);
     };
   }, []);
 
@@ -790,10 +787,11 @@ export default function Home() {
       </section>
       </div>
 
-      {/* Mobile Manifesto View (only visible on screens < 768px when tab is active) */}
-      <div className={activeMobileTab === "manifesto" ? "w-full max-w-xl px-6 py-12 flex-1 md:hidden z-10" : "hidden"}>
-        <ManifestoView />
-      </div>
+      {activeMobileTab === "manifesto" && (
+        <div className="w-full max-w-xl px-6 py-12 flex-1 md:hidden z-10">
+          <ManifestoView />
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="w-full z-10 border-t-2 border-white py-8 px-6 bg-[#040405] text-zinc-600 text-center flex flex-col md:flex-row items-center justify-between select-none gap-4">
