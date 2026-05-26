@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import ManifestoView from "@/components/manifesto-view";
 import ManifestoSheet from "@/components/manifesto-sheet";
+import Image from "next/image";
 
 // Fontlar
 const bebasNeue = Bebas_Neue({
@@ -943,6 +944,29 @@ export default function Home() {
       <ManifestoSheet isOpen={isManifestoSheetOpen} onClose={() => setIsManifestoSheetOpen(false)}>
         <ManifestoView />
       </ManifestoSheet>
+
+      {/* DGÖ Floating Logo */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, duration: 0.4 }}
+        whileHover={{ scale: 1.1, rotate: 2 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 cursor-pointer select-none"
+      >
+        <div className="relative group p-1">
+          {/* Glowing neon bg on hover */}
+          <div className="absolute inset-0 bg-[#FF003C]/10 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <Image
+            src="/dgo.png"
+            alt="DGÖ Logo"
+            width={80}
+            height={80}
+            priority
+            className="w-16 h-16 md:w-20 md:h-20 object-contain relative z-10 transition-transform duration-300 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
+          />
+        </div>
+      </motion.div>
     </main>
   );
 }
