@@ -13,6 +13,7 @@ export function JoinForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [regionalLink, setRegionalLink] = useState("");
   const [error, setError] = useState("");
+  const announcementUrl = "https://t.me/YeterLaDuyuru";
 
   const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ export function JoinForm() {
       <div className="flex flex-col items-center justify-center p-8 border border-zinc-800 rounded-2xl bg-zinc-900/50 backdrop-blur-sm animate-in fade-in duration-500 w-full max-w-md mx-auto">
         <h3 className="text-xl font-medium text-zinc-100 mb-2">Aramıza Hoş Geldin!</h3>
         <p className="text-zinc-400 text-sm mb-4 text-center">
-          Bölgendeki diğer gençlerle tanışmak için Telegram grubuna katıl.
+          Bölge grubuna katılmak için üstteki butonu kullan. Duyuruları almak istersen aşağıdaki “Duyuru Grubuna” geç.
         </p>
 
         <div
@@ -81,6 +82,16 @@ export function JoinForm() {
           className="flex items-center gap-2 px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 group w-full justify-center"
         >
           Bölgendeki Gruba Katıl
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
+
+        <a
+          href={announcementUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-6 py-3 mt-3 bg-zinc-950 text-zinc-100 font-medium rounded-full border border-zinc-800 hover:bg-[#FF003C] hover:text-black hover:border-transparent transition-all duration-300 group w-full justify-center"
+        >
+          Duyuru Grubuna Katıl (@YeterLaDuyuru)
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
       </div>

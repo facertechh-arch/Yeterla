@@ -372,6 +372,7 @@ export default function Home() {
 
   const selectedRegion = city ? CITY_TO_REGION[city] : null;
   const telegramUrl = selectedRegion ? REGIONAL_GROUPS[selectedRegion] : "#";
+  const announcementUrl = "https://t.me/YeterLaDuyuru";
 
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-[#FF003C] selection:text-white flex flex-col items-center justify-between relative overflow-hidden">
@@ -778,6 +779,19 @@ export default function Home() {
 
                   <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-500 uppercase font-mono tracking-widest`}>
                     bölgene özel şifreli telegram hücresine katıl.
+                  </span>
+
+                  <a
+                    href={announcementUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-5 px-8 text-2xl tracking-wider bg-zinc-950 hover:bg-[#FF003C] hover:text-black text-white font-black transition-all duration-300 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)]`}
+                  >
+                    DUYURU GRUBUNA KATIL (@YeterLaDuyuru) <Send className="w-6 h-6" />
+                  </a>
+
+                  <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-500 uppercase font-mono tracking-widest`}>
+                    kampanya ve duyuruların paylaşıldığı @YeterLaDuyuru grubuna geç.
                   </span>
                 </div>
               </motion.div>
