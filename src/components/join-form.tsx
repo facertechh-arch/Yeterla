@@ -5,6 +5,8 @@ import { TURKISH_CITIES, getRegionalLink } from "@/lib/regions";
 import { supabase } from "@/lib/supabase";
 import { Loader2, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PrivacyTips } from "@/components/privacy-tips";
+import { SignalGroupsPanel } from "@/components/signal-groups-panel";
 
 export function JoinForm() {
   const [nickname, setNickname] = useState("");
@@ -44,44 +46,20 @@ export function JoinForm() {
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center p-8 border border-zinc-800 rounded-2xl bg-zinc-900/50 backdrop-blur-sm animate-in fade-in duration-500 w-full max-w-md mx-auto">
-        <h3 className="text-xl font-medium text-zinc-100 mb-2">Aramıza Hoş Geldin!</h3>
+        <h3 className="text-xl font-medium text-zinc-100 mb-2">Aramıza hoş geldin!</h3>
         <p className="text-zinc-400 text-sm mb-4 text-center">
-          Bölge grubuna katılmak için üstteki butonu kullan. Duyuruları almak istersen aşağıdaki “Duyuru Grubuna” geç.
+          Kaydın tamam. Aşağıdan Telegram ve Signal gruplarına geçebilirsin.
         </p>
 
-        <div
-          role="alert"
-          className="w-full mb-6 text-left border-2 border-red-500 bg-red-500/10 p-4 rounded-lg"
-        >
-          <p className="text-sm font-bold text-red-400 text-center mb-3">
-            ⚠️ Önemli Uyarı
-          </p>
-          <div className="text-sm text-zinc-200 space-y-3 leading-relaxed">
-            <p className="text-center font-bold text-white">
-              🚨 GÜVENLİK PROTOKOLÜ: İLK GÖREV 🚨
-            </p>
-            <p>
-              Hoş geldin. Bu grupta pasif izleyici olmak yok, güvenliğini sağlamak var.
-            </p>
-            <p className="font-semibold text-red-400">⚠️ HEMEN ŞİMDİ YAPMAN GEREKENLER:</p>
-            <ul className="space-y-2 list-none">
-              <li>⚙️ 1. Telegram Ayarlarına git.</li>
-              <li>🛡️ 2. Gizlilik ve Güvenlik &gt; Telefon Numarası kısmını kesinlikle &quot;Hiç Kimse&quot; yap.</li>
-              <li>🎭 3. İsim ve soyismini anonim bir takma adla değiştir.</li>
-            </ul>
-            <p className="text-xs text-zinc-400 border-t border-zinc-700 pt-3">
-              ❗️ Burası bir ağ, ancak kimliğini korumak senin elinde. Bunu yapmayanların sorumluluğu kendine aittir.
-            </p>
-          </div>
-        </div>
+        <PrivacyTips className="w-full mb-5" variant="compact" />
 
         <a
           href={regionalLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 group w-full justify-center"
+          className="flex items-center gap-2 px-6 py-3 bg-zinc-100 text-zinc-900 font-medium rounded-full hover:bg-white transition-all duration-300 group w-full justify-center"
         >
-          Bölgendeki Gruba Katıl
+          Bölgendeki gruba katıl
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
 
@@ -89,11 +67,13 @@ export function JoinForm() {
           href={announcementUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-6 py-3 mt-3 bg-zinc-950 text-zinc-100 font-medium rounded-full border border-zinc-800 hover:bg-[#FF003C] hover:text-black hover:border-transparent transition-all duration-300 group w-full justify-center"
+          className="flex items-center gap-2 px-6 py-3 mt-3 bg-zinc-950 text-zinc-100 font-medium rounded-full border border-zinc-800 hover:bg-zinc-800 transition-all duration-300 group w-full justify-center"
         >
-          Duyuru Grubuna Katıl (@YeterLaDuyuru)
+          Telegram duyuru (@YeterLaDuyuru)
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
+
+        <SignalGroupsPanel className="mt-4" variant="compact" />
       </div>
     );
   }

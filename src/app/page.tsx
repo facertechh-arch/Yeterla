@@ -8,6 +8,8 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import ManifestoView from "@/components/manifesto-view";
 import ManifestoSheet from "@/components/manifesto-sheet";
+import { PrivacyTips } from "@/components/privacy-tips";
+import { SignalGroupsPanel } from "@/components/signal-groups-panel";
 import Image from "next/image";
 
 // Fontlar
@@ -711,89 +713,64 @@ export default function Home() {
             ) : (
               <motion.div
                 key="success-container"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ type: "spring", stiffness: 120, damping: 14 }}
-                className="bg-black border-4 border-[#FF003C] shadow-[12px_12px_0px_0px_rgba(255,255,255,1)] p-8 md:p-12 text-center relative overflow-hidden"
+                className="bg-zinc-950 border-2 border-zinc-800 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.08)] p-8 md:p-12 text-center relative overflow-hidden"
               >
-                <div className="absolute -top-10 -right-10 w-24 h-24 bg-[#FF003C]/35 rounded-full filter blur-xl" />
-
                 <div className="flex justify-center mb-6">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", delay: 0.2 }}
-                    className="w-16 h-16 rounded-full bg-[#FF003C]/10 border-2 border-[#FF003C] flex items-center justify-center text-[#FF003C]"
+                    className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/50 flex items-center justify-center text-emerald-400"
                   >
                     <CheckCircle2 className="w-8 h-8" />
                   </motion.div>
                 </div>
 
-                <h3 className={`${bebasNeue.className} text-4xl md:text-5xl font-black text-white uppercase tracking-wider`}>
-                  ARAMIZA HOŞ GELDİN, {nickname}!
+                <h3 className={`${bebasNeue.className} text-3xl md:text-4xl font-black text-white tracking-wide`}>
+                  Aramıza hoş geldin, {nickname}!
                 </h3>
                 
-                <p className={`${spaceGrotesk.className} text-zinc-400 text-sm md:text-base font-semibold max-w-sm mx-auto mt-3 uppercase`}>
-                  Sistem entegrasyonu tamamlandı. Şehrin: <span className="text-white font-bold">{city}</span>.
+                <p className={`${spaceGrotesk.className} text-zinc-400 text-sm md:text-base font-medium max-w-md mx-auto mt-3`}>
+                  Kaydın tamam. Şehrin: <span className="text-white font-semibold">{city}</span>. Aşağıdan gruplara geçebilirsin.
                 </p>
 
-                {/* Regional Telegram Route Action */}
-                <div className="mt-8 pt-6 border-t-2 border-dashed border-zinc-900 space-y-4">
-                  <div
-                    role="alert"
-                    className="text-left border-4 border-[#FF003C] bg-[#FF003C]/10 p-4 md:p-5 shadow-[4px_4px_0px_0px_#FF003C] ring-2 ring-[#FF003C]/40"
-                  >
-                    <p className={`${bebasNeue.className} text-lg md:text-xl font-black text-[#FF003C] uppercase tracking-wide text-center mb-3`}>
-                      ⚠️ Önemli Uyarı
-                    </p>
-                    <div className={`${spaceGrotesk.className} text-sm md:text-base text-zinc-100 font-semibold leading-relaxed space-y-3`}>
-                      <p className="text-center font-bold text-white">
-                        🚨 GÜVENLİK PROTOKOLÜ: İLK GÖREV 🚨
-                      </p>
-                      <p>
-                        Hoş geldin. Bu grupta pasif izleyici olmak yok, güvenliğini sağlamak var.
-                      </p>
-                      <p className="font-bold text-[#FF003C]">⚠️ HEMEN ŞİMDİ YAPMAN GEREKENLER:</p>
-                      <ul className="space-y-2 list-none pl-0">
-                        <li>⚙️ 1. Telegram Ayarlarına git.</li>
-                        <li>🛡️ 2. Gizlilik ve Güvenlik &gt; Telefon Numarası kısmını kesinlikle &quot;Hiç Kimse&quot; yap.</li>
-                        <li>🎭 3. İsim ve soyismini anonim bir takma adla değiştir.</li>
-                      </ul>
-                      <p className="text-xs md:text-sm text-zinc-300 border-t border-zinc-800 pt-3">
-                        ❗️ Burası bir ağ, ancak kimliğini korumak senin elinde. Bunu yapmayanların sorumluluğu kendine aittir.
-                      </p>
-                    </div>
-                  </div>
+                <div className="mt-8 pt-6 border-t border-dashed border-zinc-800 space-y-5 text-left">
+                  <PrivacyTips className={`${spaceGrotesk.className}`} />
 
-                  <p className={`${spaceGrotesk.className} text-xs text-[#FF003C] font-extrabold tracking-widest uppercase`}>
-                    ŞİMDİ EYLEM ZAMANI
+                  <p className={`${spaceGrotesk.className} text-xs text-zinc-500 font-medium tracking-wide text-center`}>
+                    Telegram grupları
                   </p>
 
                   <a
                     href={telegramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-5 px-8 text-2xl tracking-wider bg-[#FF003C] hover:bg-white hover:text-black text-white font-black transition-all duration-300 animate-bounce shadow-[6px_6px_0px_0px_rgba(255,255,255,0.4)] hover:shadow-[6px_6px_0px_0px_#000]`}
+                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-4 px-8 text-xl tracking-wide bg-[#FF003C] hover:bg-white hover:text-black text-white font-black transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]`}
                   >
-                    BÖLGENDEKİ GRUBA KATIL <Send className="w-6 h-6" />
+                    Bölgendeki gruba katıl <Send className="w-5 h-5" />
                   </a>
 
-                  <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-500 uppercase font-mono tracking-widest`}>
-                    bölgene özel şifreli telegram hücresine katıl.
+                  <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-600 text-center`}>
+                    Şehrine yakın bölge Telegram grubu
                   </span>
 
                   <a
                     href={announcementUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-5 px-8 text-2xl tracking-wider bg-zinc-950 hover:bg-[#FF003C] hover:text-black text-white font-black transition-all duration-300 shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)]`}
+                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-4 px-8 text-xl tracking-wide bg-zinc-900 border-2 border-zinc-700 hover:border-zinc-500 text-white font-black transition-all duration-300`}
                   >
-                    DUYURU GRUBUNA KATIL (@YeterLaDuyuru) <Send className="w-6 h-6" />
+                    Telegram duyuru (@YeterLaDuyuru) <Send className="w-5 h-5" />
                   </a>
 
-                  <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-500 uppercase font-mono tracking-widest`}>
-                    kampanya ve duyuruların paylaşıldığı @YeterLaDuyuru grubuna geç.
-                  </span>
+                  <p className={`${spaceGrotesk.className} text-xs text-zinc-500 font-medium tracking-wide text-center pt-2`}>
+                    Signal
+                  </p>
+
+                  <SignalGroupsPanel />
                 </div>
               </motion.div>
             )}
