@@ -54,14 +54,19 @@ export async function POST(request: NextRequest) {
   const trimmedText = message.text.trim();
 
   // /start veya /bilgilendirme komutu kontrolü
-  if (trimmedText.startsWith("/start") || trimmedText.startsWith("/bilgilendirme")) {
+  if (
+    trimmedText.startsWith("/start") ||
+    trimmedText.startsWith("/bilgilendirme") ||
+    trimmedText.startsWith("/yardim") ||
+    trimmedText.startsWith("/help")
+  ) {
     await sendTelegramReply(
       message.chat.id,
       "📢 YETER LA - BİLGİLENDİRME SİSTEMİ\n\n" +
       "Bu bot, yerel gençlik hücrelerindeki aktif katılımcı sayısını doğrulamak ve koordinasyon sağlamak amacıyla kurulmuştur.\n\n" +
       "⚙️ Komutlar ve Kullanım:\n" +
-      "• /yoklama : Gerçek Telegram kullanıcı adınızla yoklama verirsiniz (ilk kez yapıyorsanız bu isimle otomatik kayıt olursunuz).\n" +
-      "• /yoklama <kod_adi> : Belirttiğiniz takma ad (kod adı) ile yoklama verirsiniz (veya kayıtlı isminizi güncellersiniz).\n" +
+      "• /kayit <kod_adi> : Belirttiğiniz takma ad (kod adı) ile kayıt olursunuz veya isminizi güncellersiniz.\n" +
+      "• /buradayim : Yoklama verirsiniz (aktif olduğunuzu bildirmek için).\n" +
       "• /bilgilendirme : Bot hakkındaki bu bilgilendirme mesajını görüntülersiniz.\n\n" +
       "🔒 Gizlilik & Güvenlik:\n" +
       "• Telefon numaranız veya gerçek adınız kesinlikle veritabanına kaydedilmez.\n" +
@@ -71,9 +76,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  // /yoklama komutu kontrolü
-  const match = trimmedText.match(/^\/yoklama(?:@\w+)?(?:\s+(.+))?$/i);
-  if (!match) {
+  // Komut kontrolü (yoklama, kayit, buradayim)
+  let argument: string | undefined = undefined;
+  let isCommandFound = false;
+
+  const matchYoklama = trimmedText.match(/^\/yoklama(?:@\w+)?(?:\s+(.+))?$/i);
+  const matchKayit = trimmedText.match(/^\/kayit(?:@\w+)?(?:\s+(.+))?$/i);
+  const matchBuradayim = trimmedText.match(/^\/buradayim(?:@\w+)?(?:\s+(.+))?$/i);
+
+  if (matchYoklama) {
+    isCommandFound = true;
+    argument = matchYoklama[1]?.trim();
+  } else if (matchKayit) {
+    isCommandFound = true;
+    argument = matchKayit[1]?.trim();
+  } else if (matchBuradayim) {
+    isCommandFound = true;
+    argument = matchBuradayim[1]?.trim();
+  }
+
+  if (!isCommandFound) {
     return NextResponse.json({ ok: true });
   }
 
@@ -82,7 +104,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Database not configured" }, { status: 503 });
   }
 
-  const argument = match[1]?.trim();
   const telegramId = message.from.id;
 
   // Kullanıcı zaten kayıtlı mı kontrol et
@@ -126,7 +147,7 @@ export async function POST(request: NextRequest) {
       } else {
         await sendTelegramReply(
           message.chat.id,
-          "Kayıt bulunamadı. Kayıt olmak için lütfen adınızı belirtin.\nÖrnek: `/yoklama Ahmet` veya `/yoklama kod-adiniz`"
+          "Kayıt bulunamadı. Kayıt olmak için lütfen bir kod adı belirtin.\nÖrnek: `/kayit Ahmet` veya `/kayit kod-adiniz`"
         );
         return NextResponse.json({ ok: true });
       }
@@ -155,7 +176,7 @@ export async function POST(request: NextRequest) {
     await sendTelegramReply(
       message.chat.id,
       `Yoklama kaydınız "${finalKodAdi}" ismiyle başarıyla oluşturuldu. ` +
-      `Bundan sonra sadece "/yoklama" yazarak yoklama verebilirsiniz!`
+      `Bundan sonra sadece "/buradayim" yazarak yoklama verebilirsiniz!`
     );
   } else {
     await sendTelegramReply(
