@@ -125,7 +125,22 @@ INSERT INTO manifesto_blocks (order_index, content) VALUES
 (3, 'ŞİKAYET ETMEYİ BIRAK, BİR ARAYA GEL. Harekete geçmek ve değişimi yerelden, kendi mahallemizden, kendi okulumuzdan başlatmak için örgütleniyoruz. Bu platform, geleceğimizi ortak akılla yeniden yazma aracıdır.')
 ON CONFLICT (order_index) DO UPDATE SET content = EXCLUDED.content;
 
--- 11. Seed Secure Admin Credentials
+-- 11. Yoklama Table (Telegram bot webhook activity)
+CREATE TABLE IF NOT EXISTS yoklama (
+    telegram_id BIGINT PRIMARY KEY,
+    kod_adi TEXT NOT NULL,
+    son_yoklama TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+ALTER TABLE yoklama ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Allow public read access to yoklama"
+ON yoklama FOR SELECT
+USING (true);
+
+CREATE INDEX IF NOT EXISTS idx_yoklama_son_yoklama ON yoklama(son_yoklama DESC);
+
+-- 12. Seed Secure Admin Credentials
 INSERT INTO admin_settings (key, value) VALUES
 ('admin_password', 'YeterLa!SuperSecureAdminKey2026*#-0')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value;

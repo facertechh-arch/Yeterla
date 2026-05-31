@@ -11,6 +11,7 @@ import ManifestoSheet from "@/components/manifesto-sheet";
 import { PrivacyTips } from "@/components/privacy-tips";
 import { SignalGroupsPanel } from "@/components/signal-groups-panel";
 import Image from "next/image";
+import SecretAdminModal from "@/components/secret-admin-modal";
 
 // Fontlar
 const bebasNeue = Bebas_Neue({
@@ -157,9 +158,7 @@ export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [plusOnes, setPlusOnes] = useState<{ id: number }[]>([]);
   const prevCountRef = useRef<number | null>(null);
-  const [secretMembers, setSecretMembers] = useState<{ nickname: string; city: string }[]>([]);
-  const [loadingSecret, setLoadingSecret] = useState(false);
-  const [showSecretList, setShowSecretList] = useState(false);
+  const [showSecretAdmin, setShowSecretAdmin] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
   const loadingMessages = [
@@ -168,6 +167,13 @@ export default function Home() {
     "TELEGRAM YÖNLENDİRİCİSİ AYARLANIYOR...",
     "SİSTEM BAĞLANTISI GÜVENLİ VE AKTİF!"
   ];
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("admin") === "1") {
+      setShowSecretAdmin(true);
+    }
+  }, []);
 
   // Başlangıç sayacını çek
   useEffect(() => {
@@ -240,47 +246,12 @@ export default function Home() {
       }
       if (keys === "/-*0") {
         keys = "";
-        setShowSecretList((prev) => !prev);
+        setShowSecretAdmin((prev) => !prev);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  // Gizli menü açılınca üyeleri listele
-  useEffect(() => {
-    if (showSecretList) {
-      const fetchMembers = async () => {
-        setLoadingSecret(true);
-        try {
-          if (supabase && typeof supabase.from === "function") {
-            const { data, error } = await supabase
-              .from("members")
-              .select("nickname, city")
-              .order("id", { ascending: false });
-
-            if (data && !error) {
-              setSecretMembers(data);
-              setLoadingSecret(false);
-              return;
-            }
-          }
-        } catch (err) {
-          // Fail silently
-        }
-
-        // Mock fallback
-        setSecretMembers([
-          { nickname: "AsilRebel", city: "İstanbul" },
-          { nickname: "VatanSever", city: "Ankara" },
-          { nickname: "HürGenç", city: "İzmir" },
-          { nickname: "YeterArtık", city: "Bursa" },
-        ]);
-        setLoadingSecret(false);
-      };
-      fetchMembers();
-    }
-  }, [showSecretList]);
 
   // Sayaç için ufak bi interval (ortalama 10 dk)
   useEffect(() => {
@@ -320,7 +291,7 @@ export default function Home() {
     e.preventDefault();
     if (nickname === "/-*0") {
       setNickname("");
-      setShowSecretList(true);
+      setShowSecretAdmin(true);
       return;
     }
     const cleanNickname = nickname.trim();
@@ -860,62 +831,10 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Secret Admin Member List Modal */}
-      <AnimatePresence>
-        {showSecretList && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-sm"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="w-full max-w-lg bg-black border-4 border-[#FF003C] shadow-[12px_12px_0px_#fff] p-6 md:p-8 relative max-h-[80vh] flex flex-col"
-            >
-              <div className="absolute top-0 left-0 bg-[#FF003C] text-black font-mono text-xs px-2 py-0.5 font-bold uppercase">
-                SİSTEM GÜNLÜKLERİ // VERİTABANI
-              </div>
-
-              <h4 className={`${bebasNeue.className} text-3xl md:text-4xl font-black text-white mt-4 mb-4 tracking-wider uppercase border-b-2 border-dashed border-zinc-800 pb-2`}>
-                KAYITLI ÜYE LİSTESİ ({secretMembers.length})
-              </h4>
-
-              <div className="flex-1 overflow-y-auto space-y-2 pr-2 font-mono text-xs text-zinc-400 max-h-[50vh]">
-                {loadingSecret ? (
-                  <div className="flex items-center justify-center py-12">
-                    <Loader2 className="w-8 h-8 text-[#FF003C] animate-spin" />
-                  </div>
-                ) : secretMembers.length === 0 ? (
-                  <p className="text-center py-6 text-zinc-600">KAYITLI KULLANICI BULUNAMADI.</p>
-                ) : (
-                  <div className="border border-zinc-900 bg-zinc-950/40 divide-y divide-zinc-900">
-                    <div className="flex bg-zinc-900/60 font-bold uppercase text-zinc-500 py-2 px-3">
-                      <div className="w-1/2">TAKMA AD</div>
-                      <div className="w-1/2">ŞEHİR</div>
-                    </div>
-                    {secretMembers.map((m, idx) => (
-                      <div key={idx} className="flex py-2.5 px-3 hover:bg-zinc-900/30 transition-colors">
-                        <div className="w-1/2 text-white font-bold break-all">{m.nickname}</div>
-                        <div className="w-1/2 text-zinc-300">{m.city}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <button
-                onClick={() => setShowSecretList(false)}
-                className={`${bebasNeue.className} mt-6 w-full py-4 text-2xl bg-white text-black font-extrabold hover:bg-[#FF003C] hover:text-white transition-colors duration-200 border-2 border-black tracking-widest cursor-pointer`}
-              >
-                KAPAT
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <SecretAdminModal
+        isOpen={showSecretAdmin}
+        onClose={() => setShowSecretAdmin(false)}
+      />
 
       {/* Manifesto Sheet Drawer overlay (Desktop Only) */}
       <ManifestoSheet isOpen={isManifestoSheetOpen} onClose={() => setIsManifestoSheetOpen(false)}>

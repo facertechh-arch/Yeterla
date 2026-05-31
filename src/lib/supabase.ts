@@ -12,9 +12,16 @@ const createMockClient = () => {
         return { data: null, error: null };
       },
       select: () => ({
+        order: () => ({
+          then: (resolve: (value: { data: never[]; error: null }) => void) =>
+            resolve({ data: [], error: null }),
+        }),
+        eq: () => ({
+          single: async () => ({ data: null, error: null }),
+        }),
         single: async () => ({ data: null, error: null }),
         maybeSingle: async () => ({ data: null, error: null }),
-      })
+      }),
     })
   } as any;
 };
