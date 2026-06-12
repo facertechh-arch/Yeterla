@@ -39,6 +39,19 @@ const REGIONAL_GROUPS = {
   guneydoguanadolu: "https://t.me/+ndEM9-tD771jNmE8",
 };
 
+const TELEGRAM_LINKS = [
+  { name: "İstanbul", url: REGIONAL_GROUPS.istanbul },
+  { name: "Ankara", url: REGIONAL_GROUPS.ankara },
+  { name: "İzmir", url: REGIONAL_GROUPS.izmir },
+  { name: "Marmara", url: REGIONAL_GROUPS.marmara },
+  { name: "Ege", url: REGIONAL_GROUPS.ege },
+  { name: "İç Anadolu", url: REGIONAL_GROUPS.icanadolu },
+  { name: "Akdeniz", url: REGIONAL_GROUPS.akdeniz },
+  { name: "Karadeniz", url: REGIONAL_GROUPS.karadeniz },
+  { name: "Doğu Anadolu", url: REGIONAL_GROUPS.doguanadolu },
+  { name: "Güneydoğu Anadolu", url: REGIONAL_GROUPS.guneydoguanadolu },
+];
+
 // Şehir - Bölge eşleşmeleri
 const CITY_TO_REGION: Record<string, keyof typeof REGIONAL_GROUPS> = {
   "İstanbul": "istanbul",
@@ -149,7 +162,6 @@ export default function Home() {
   const [isManifestoSheetOpen, setIsManifestoSheetOpen] = useState(false);
   const [city, setCity] = useState("");
   const [honeypot, setHoneypot] = useState("");
-  const [kvkkChecked, setKvkkChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -288,8 +300,6 @@ export default function Home() {
 
   const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!city || !kvkkChecked) return;
 
     setIsSubmitting(true);
     setLoadingStep(0);
@@ -386,6 +396,26 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Telegram Link Bar */}
+      <div className="w-full bg-[#FF003C] py-2 z-20 border-b border-zinc-900">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex gap-2 overflow-x-auto flex-nowrap items-center pb-1" style={{ scrollbarWidth: "none" }}>
+            <span className={`${bebasNeue.className} text-black font-black tracking-widest flex-shrink-0 mr-2 text-lg`}>KANALLAR:</span>
+            {TELEGRAM_LINKS.map((link) => (
+              <a
+                key={link.name}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${spaceGrotesk.className} text-xs font-bold bg-black text-white px-3 py-1.5 hover:bg-zinc-900 transition-colors whitespace-nowrap`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Brutalist Grid Overlay Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c0c0e_1px,transparent_1px),linear-gradient(to_bottom,#0c0c0e_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none opacity-45" />
@@ -561,13 +591,12 @@ export default function Home() {
                     </p>
                     <div className="relative">
                       <select
-                        required
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                         disabled={isSubmitting}
                         className={`${spaceGrotesk.className} w-full p-4 bg-zinc-900 border-2 border-zinc-800 focus:border-[#FF003C] text-white rounded-none focus:outline-none transition-all appearance-none cursor-pointer font-semibold text-base`}
                       >
-                        <option value="" disabled className="text-zinc-600">Şehir Seç...</option>
+                        <option value="" className="text-zinc-600">Şehir Seç... (İsteğe Bağlı)</option>
                         {TURKISH_CITIES.map((c) => (
                           <option key={c} value={c} className="bg-zinc-950 text-white">
                             {c}
@@ -580,37 +609,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* KVKK Checkbox */}
-                  <div className="flex items-start gap-3 mt-4 text-left">
-                    <input
-                      id="kvkk"
-                      type="checkbox"
-                      required
-                      checked={kvkkChecked}
-                      disabled={isSubmitting}
-                      onChange={(e) => setKvkkChecked(e.target.checked)}
-                      className="mt-1 w-5 h-5 rounded-none border-2 border-zinc-800 bg-zinc-900 text-[#FF003C] focus:ring-0 focus:outline-none accent-[#FF003C] cursor-pointer"
-                    />
-                    <label 
-                      htmlFor="kvkk" 
-                      className={`${spaceGrotesk.className} text-[11px] text-zinc-500 font-semibold select-none cursor-pointer uppercase leading-snug`}
-                    >
-                      Şehrimin, bölgeme özel Telegram grubuna yönlendirilmem ve katılımcı sayısının doğrulanması amacıyla işlenmesini kabul ediyorum.{" "}
-                      <span 
-                        className="text-[#FF003C] hover:underline cursor-pointer font-extrabold" 
-                        onClick={(e) => { 
-                          e.preventDefault(); 
-                          setModalContent({
-                            title: "KVKK AYDINLATMA METNİ",
-                            text: "1. Veri Sorumlusu: Yeter La Sivil Gençlik İnisiyatifi\n\n2. İşlenen Veriler: Şehir bilginiz.\n\n3. İşleme Amacı: Bölgelere özel şifreli Telegram hücre davetlerinin atanması ve aktif katılımcı sayacının güncel tutulması.\n\n4. Haklarınız: Kaydınızın kalıcı olarak silinmesini talep etmek için dilediğiniz an iletişim kanallarından bize ulaşabilirsiniz. Verileriniz kesinlikle üçüncü parti şahıs veya reklam firmalarıyla paylaşılmaz."
-                          });
-                        }}
-                      >
-                        KVKK Aydınlatma Metni'ni
-                      </span>{" "}
-                      okudum ve onaylıyorum.
-                    </label>
-                  </div>
+                  {/* KVKK Checkbox Removed */}
 
                   {/* Submit Button */}
                   <button
@@ -679,7 +678,7 @@ export default function Home() {
                 </h3>
                 
                 <p className={`${spaceGrotesk.className} text-zinc-400 text-sm md:text-base font-medium max-w-md mx-auto mt-3`}>
-                  Kaydın tamam. Şehrin: <span className="text-white font-semibold">{city}</span>. Aşağıdan gruplara geçebilirsin.
+                  Kaydın tamam. {city ? (<span>Şehrin: <span className="text-white font-semibold">{city}</span>. Aşağıdan grubuna geçebilirsin.</span>) : "Aşağıdan bölgene uygun gruba geçebilirsin."}
                 </p>
 
                 <div className="mt-8 pt-6 border-t border-dashed border-zinc-800 space-y-5 text-left">
@@ -689,14 +688,30 @@ export default function Home() {
                     Telegram grupları
                   </p>
 
-                  <a
-                    href={telegramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-4 px-8 text-xl tracking-wide bg-[#FF003C] hover:bg-white hover:text-black text-white font-black transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]`}
-                  >
-                    Bölgendeki gruba katıl <Send className="w-5 h-5" />
-                  </a>
+                  {city ? (
+                    <a
+                      href={telegramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${bebasNeue.className} inline-flex items-center justify-center gap-3 w-full py-4 px-8 text-xl tracking-wide bg-[#FF003C] hover:bg-white hover:text-black text-white font-black transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]`}
+                    >
+                      Bölgendeki gruba katıl <Send className="w-5 h-5" />
+                    </a>
+                  ) : (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                      {TELEGRAM_LINKS.map(link => (
+                        <a
+                          key={link.name}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${bebasNeue.className} flex items-center justify-center py-2 px-3 text-lg tracking-wide bg-zinc-900 hover:bg-[#FF003C] border border-zinc-800 hover:border-[#FF003C] text-white transition-all`}
+                        >
+                          {link.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
 
                   <span className={`${spaceGrotesk.className} block text-[10px] text-zinc-600 text-center`}>
                     Şehrine yakın bölge Telegram grubu
