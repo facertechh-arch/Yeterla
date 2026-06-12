@@ -145,7 +145,6 @@ const TURKISH_CITIES = Object.keys(CITY_TO_REGION).sort((a, b) =>
 
 export default function Home() {
   const [count, setCount] = useState<number | null>(null);
-  const [nickname, setNickname] = useState("");
   const [activeMobileTab, setActiveMobileTab] = useState<"join" | "manifesto">("join");
   const [isManifestoSheetOpen, setIsManifestoSheetOpen] = useState(false);
   const [city, setCity] = useState("");
@@ -289,22 +288,9 @@ export default function Home() {
 
   const handleJoin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (nickname === "/-*0") {
-      setNickname("");
-      setShowSecretAdmin(true);
-      return;
-    }
-    const cleanNickname = nickname.trim();
-    if (!cleanNickname || !city || !kvkkChecked) return;
+    
+    if (!city || !kvkkChecked) return;
 
-    // Hızlı girdi doğrulaması (Sunucuyla uyumlu güvenlik filtresi)
-    const NICKNAME_REGEX = /^[a-zA-Z0-9çÇğĞıİöÖşŞüÜ \-_]+$/;
-    if (cleanNickname.length < 2 || cleanNickname.length > 30 || !NICKNAME_REGEX.test(cleanNickname)) {
-      alert("Takma ad 2 ila 30 karakter uzunluğunda olmalı ve sadece harf, rakam, boşluk, tire (-) veya alt çizgi (_) içermelidir!");
-      return;
-    }
-
-    setNickname(cleanNickname);
     setIsSubmitting(true);
     setLoadingStep(0);
 
@@ -326,7 +312,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nickname, city, honeypot }),
+        body: JSON.stringify({ city, honeypot }),
       });
     } catch (err: any) {
       // Fail completely silently so the client proceeds to success state smoothly
@@ -548,7 +534,7 @@ export default function Home() {
                     BİR ARAYA GEL
                   </h3>
                   <p className={`${spaceGrotesk.className} text-sm text-zinc-500 mt-1 uppercase font-semibold`}>
-                    Takma adını ve şehrini gir, ağa entegre ol.
+                    Şehrini gir, ağa entegre ol.
                   </p>
                 </div>
 
@@ -563,28 +549,16 @@ export default function Home() {
                     tabIndex={-1}
                     autoComplete="off"
                   />
-                  {/* Nickname Input */}
-                  <div className="space-y-2">
-                    <label className={`${bebasNeue.className} text-xl tracking-wider text-white block uppercase`}>
-                      Takma Ad
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      maxLength={30}
-                      value={nickname}
-                      onChange={(e) => setNickname(e.target.value)}
-                      placeholder="Örn: AsilRebel"
-                      disabled={isSubmitting}
-                      className={`${spaceGrotesk.className} w-full p-4 bg-zinc-900 border-2 border-zinc-800 focus:border-[#FF003C] text-white rounded-none focus:outline-none transition-all placeholder:text-zinc-600 font-semibold text-base`}
-                    />
-                  </div>
+                  {/* Nickname Input Removed */}
 
                   {/* City Select Dropdown */}
                   <div className="space-y-2">
                     <label className={`${bebasNeue.className} text-xl tracking-wider text-white block uppercase`}>
                       Şehir
                     </label>
+                    <p className={`${spaceGrotesk.className} text-sm text-zinc-400 mb-2 leading-relaxed`}>
+                      İl bilgilerini alma sebebimiz sosyal medyayla ulaşabildiğimiz kitlenin konumunu öğrenmek ve kişileri illerine ve bölgelerine göre telegram grubuna yönlendirmek.
+                    </p>
                     <div className="relative">
                       <select
                         required
@@ -621,14 +595,14 @@ export default function Home() {
                       htmlFor="kvkk" 
                       className={`${spaceGrotesk.className} text-[11px] text-zinc-500 font-semibold select-none cursor-pointer uppercase leading-snug`}
                     >
-                      Takma adımın ve şehrimin, bölgeme özel Telegram grubuna yönlendirilmem ve katılımcı sayısının doğrulanması amacıyla işlenmesini kabul ediyorum.{" "}
+                      Şehrimin, bölgeme özel Telegram grubuna yönlendirilmem ve katılımcı sayısının doğrulanması amacıyla işlenmesini kabul ediyorum.{" "}
                       <span 
                         className="text-[#FF003C] hover:underline cursor-pointer font-extrabold" 
                         onClick={(e) => { 
                           e.preventDefault(); 
                           setModalContent({
                             title: "KVKK AYDINLATMA METNİ",
-                            text: "1. Veri Sorumlusu: Yeter La Sivil Gençlik İnisiyatifi\n\n2. İşlenen Veriler: Takma ad ve şehir bilginiz.\n\n3. İşleme Amacı: Bölgelere özel şifreli Telegram hücre davetlerinin atanması ve aktif katılımcı sayacının güncel tutulması.\n\n4. Haklarınız: Kaydınızın kalıcı olarak silinmesini talep etmek için dilediğiniz an iletişim kanallarından bize ulaşabilirsiniz. Verileriniz kesinlikle üçüncü parti şahıs veya reklam firmalarıyla paylaşılmaz."
+                            text: "1. Veri Sorumlusu: Yeter La Sivil Gençlik İnisiyatifi\n\n2. İşlenen Veriler: Şehir bilginiz.\n\n3. İşleme Amacı: Bölgelere özel şifreli Telegram hücre davetlerinin atanması ve aktif katılımcı sayacının güncel tutulması.\n\n4. Haklarınız: Kaydınızın kalıcı olarak silinmesini talep etmek için dilediğiniz an iletişim kanallarından bize ulaşabilirsiniz. Verileriniz kesinlikle üçüncü parti şahıs veya reklam firmalarıyla paylaşılmaz."
                           });
                         }}
                       >
@@ -701,7 +675,7 @@ export default function Home() {
                 </div>
 
                 <h3 className={`${bebasNeue.className} text-3xl md:text-4xl font-black text-white tracking-wide`}>
-                  Aramıza hoş geldin, {nickname}!
+                  Aramıza hoş geldin!
                 </h3>
                 
                 <p className={`${spaceGrotesk.className} text-zinc-400 text-sm md:text-base font-medium max-w-md mx-auto mt-3`}>

@@ -47,18 +47,17 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { nickname, city, honeypot } = body;
+    const { city, honeypot } = body;
 
     // Honeypot kontrolü (Eğer gizli alan doldurulduysa kesin bottur)
     if (honeypot) {
       return NextResponse.json({ success: true, botDetected: true });
     }
 
-    if (!nickname || !city) {
-      return NextResponse.json({ error: "Nickname and City are required" }, { status: 400 });
+    if (!city) {
+      return NextResponse.json({ error: "City is required" }, { status: 400 });
     }
 
-    const cleanNickname = nickname.trim();
     const cleanCity = city.trim();
 
     // 1. Şehir doğrulaması (Sadece Türkiye'deki 81 geçerli şehre izin veriyoruz)
@@ -67,25 +66,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Geçersiz şehir seçimi" }, { status: 400 });
     }
 
-    // 2. Takma ad uzunluk kontrolü (2 - 30 karakter arası)
-    if (cleanNickname.length < 2 || cleanNickname.length > 30) {
-      return NextResponse.json({ error: "Takma ad 2 ila 30 karakter arasında olmalıdır" }, { status: 400 });
-    }
-
-    // 3. Takma ad karakter kontrolü
-    // Sadece Türkçe/İngilizce harfler, rakamlar, boşluk, alt çizgi (_) ve tire (-) karakterlerine izin veriyoruz.
-    // HTML tagleri (<script>), tek/çift tırnaklar (') veya SQL özel karakterleri tamamen engellenmiş oluyor.
-    const NICKNAME_REGEX = /^[a-zA-Z0-9çÇğĞıİöÖşŞüÜ \-_]+$/;
-    if (!NICKNAME_REGEX.test(cleanNickname)) {
-      return NextResponse.json({ error: "Takma ad geçersiz karakterler içeriyor" }, { status: 400 });
-    }
-
     // 4. Üyeyi Supabase'e ekle
     // Not: Supabase JS SDK (PostgREST) arka planda parametrik sorgular kullandığı için 
     // SQL Injection açıklarına karşı kendiliğinden %100 korumalıdır.
     const { error: insertError } = await supabase
       .from("members")
-      .insert([{ nickname: cleanNickname, city: cleanCity }]);
+      .insert([{ city: cleanCity }]);
 
     // Sayacı güvenli şekilde artırmayı dene
     const { error: rpcError } = await supabase.rpc("increment_counter");
