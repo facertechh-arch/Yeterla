@@ -14,14 +14,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
-  description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
-  keywords: ["yeter la", "gençlik inisiyatifi", "bir araya gelme", "sivil toplum", "telegram hücreleri", "aktivizm", "değişim", "türkiye gençliği"],
+  description:
+    "YeterLa; dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve değiştirilebilir manifestosu ile gençliğin yerelden örgütlenmesini amaçlayan merkeziyetsiz bir harekettir.",
+  keywords: [
+    "yeter la",
+    "yeterla",
+    "dağınık gençlik örgütlenmesi",
+    "işleyiş ilkeleri",
+    "merkeziyetsiz gençlik hareketi",
+    "gençlik inisiyatifi",
+    "manifesto",
+    "telegram",
+    "signal",
+    "türkiye gençliği",
+  ],
   authors: [{ name: "Yeter La İnisiyatifi" }],
   creator: "Yeter La Sivil Gençlik İnisiyatifi",
   publisher: "Yeter La",
+  metadataBase: new URL("https://yeterla.com"),
   openGraph: {
     title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
-    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
+    description:
+      "YeterLa'nın dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve yaşayan manifestosu tek yerde.",
     url: "https://yeterla.com",
     siteName: "Yeter La",
     locale: "tr_TR",
@@ -30,7 +44,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
-    description: "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
+    description:
+      "Dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve değiştirilebilir manifesto yapısı.",
   },
   robots: {
     index: true,
@@ -47,16 +62,35 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Yeter La Sivil Gençlik İnisiyatifi",
-  "url": "https://yeterla.com",
-  "logo": "https://yeterla.com/favicon.ico",
-  "description": "Sürekli şikayet etmek hiçbir şeyi çözmedi. Bölgeni seç, kendi gençlik grubuna katıl, bir araya gel ve değişimi yerelden başlat.",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "email": "yeterla@tutamail.com",
-    "contactType": "Customer Service"
-  }
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Yeter La Sivil Gençlik İnisiyatifi",
+      "url": "https://yeterla.com",
+      "logo": "https://yeterla.com/favicon.ico",
+      "description":
+        "YeterLa; dağınık gençlik örgütlenmesi doktrini temelinde merkeziyetsiz, bağımsız ve değiştirilebilir manifesto yapısına sahip bir gençlik hareketidir.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "yeterla@tutamail.com",
+        "contactType": "Customer Service"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "name": "YeterLa | Dağınık Gençlik Örgütlenmesi Doktrini ve İşleyiş İlkeleri",
+      "url": "https://yeterla.com",
+      "inLanguage": "tr-TR",
+      "description":
+        "YeterLa'nın işleyiş ilkeleri, dağınık gençlik örgütlenmesi doktrini, stratejik avantajları ve yaşayan manifesto yaklaşımı.",
+      "about": [
+        "Dağınık Gençlik Örgütlenmesi Doktrini",
+        "Merkeziyetsiz gençlik hareketi",
+        "İşleyiş ilkeleri",
+        "Değiştirilebilir manifesto"
+      ]
+    }
+  ]
 };
 
 export default function RootLayout({
