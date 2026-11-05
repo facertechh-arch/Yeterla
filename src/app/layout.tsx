@@ -13,18 +13,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+  title: "Yeter La | Şikayet Etmeyi Bırak, Harekete Geç!",
   description:
-    "YeterLa; dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve değiştirilebilir manifestosu ile gençliğin yerelden örgütlenmesini amaçlayan merkeziyetsiz bir harekettir.",
+    "Yeter La; merkeziyetsiz hareket doktrini, işleyiş ilkeleri ve değiştirilebilir manifestosu ile gençliğin yerelden örgütlenmesini amaçlayan bağımsız bir harekettir.",
   keywords: [
     "yeter la",
     "yeterla",
-    "dağınık gençlik örgütlenmesi",
+    "gençlik hareketi",
     "işleyiş ilkeleri",
     "merkeziyetsiz gençlik hareketi",
     "gençlik inisiyatifi",
     "manifesto",
-    "telegram",
     "signal",
     "türkiye gençliği",
   ],
@@ -33,9 +32,9 @@ export const metadata: Metadata = {
   publisher: "Yeter La",
   metadataBase: new URL("https://yeterla.com"),
   openGraph: {
-    title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+    title: "Yeter La | Şikayet Etmeyi Bırak, Harekete Geç!",
     description:
-      "YeterLa'nın dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve yaşayan manifestosu tek yerde.",
+      "Yeter La'nın merkeziyetsiz hareket doktrini, işleyiş ilkeleri ve yaşayan manifestosu tek yerde.",
     url: "https://yeterla.com",
     siteName: "Yeter La",
     locale: "tr_TR",
@@ -43,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yeter La | Şikayet Etmeyi Bırak, Bir Araya Gel!",
+    title: "Yeter La | Şikayet Etmeyi Bırak, Harekete Geç!",
     description:
-      "Dağınık gençlik örgütlenmesi doktrini, işleyiş ilkeleri ve değiştirilebilir manifesto yapısı.",
+      "Gençlik hareketi doktrini, işleyiş ilkeleri ve değiştirilebilir manifesto yapısı.",
   },
   robots: {
     index: true,
@@ -69,22 +68,22 @@ const jsonLd = {
       "url": "https://yeterla.com",
       "logo": "https://yeterla.com/favicon.ico",
       "description":
-        "YeterLa; dağınık gençlik örgütlenmesi doktrini temelinde merkeziyetsiz, bağımsız ve değiştirilebilir manifesto yapısına sahip bir gençlik hareketidir.",
+        "Yeter La; merkeziyetsiz hareket doktrini temelinde bağımsız ve değiştirilebilir manifesto yapısına sahip bir gençlik hareketidir.",
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "yeterla@tutamail.com",
+        "email": "yeterla02@proton.me",
         "contactType": "Customer Service"
       }
     },
     {
       "@type": "WebPage",
-      "name": "YeterLa | Dağınık Gençlik Örgütlenmesi Doktrini ve İşleyiş İlkeleri",
+      "name": "Yeter La | Gençlik Hareketi Doktrini ve İşleyiş İlkeleri",
       "url": "https://yeterla.com",
       "inLanguage": "tr-TR",
       "description":
-        "YeterLa'nın işleyiş ilkeleri, dağınık gençlik örgütlenmesi doktrini, stratejik avantajları ve yaşayan manifesto yaklaşımı.",
+        "Yeter La'nın işleyiş ilkeleri, merkeziyetsiz hareket doktrini, stratejik avantajları ve yaşayan manifesto yaklaşımı.",
       "about": [
-        "Dağınık Gençlik Örgütlenmesi Doktrini",
+        "Gençlik Hareketi Doktrini",
         "Merkeziyetsiz gençlik hareketi",
         "İşleyiş ilkeleri",
         "Değiştirilebilir manifesto"

@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/gelecek/layout,_N_T_/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi/layout,_N_T_/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi/page,_N_T_/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi/__PAGE__",
+    "/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi",
+    "/gelecek",
+    "/_index",
+    "/_head"
+  ]
+}

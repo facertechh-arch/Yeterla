@@ -3,6 +3,11 @@ export const SIGNAL_ANNOUNCEMENT_URL =
 
 export const SIGNAL_SERVER_GROUPS = [
   {
+    id: "main",
+    name: "Yeter La Gençlik Hareketi",
+    url: "https://signal.group/#CjQKIN1-dmEFaZ8V0YIZEw2ahFa8nVZLGTyMyhUmIczV_aDpEhCr9mkmJW3gm7ASfko36vt5",
+  },
+  {
     id: "1",
     name: "Yeter La #1",
     url: "https://signal.group/#CjQKIH2JszqpLMK75Xr5mn1OIOgKSmV-nRnMROujbP5KiXE6EhCI-_e9kmPQPpCvJjg0GAj-",

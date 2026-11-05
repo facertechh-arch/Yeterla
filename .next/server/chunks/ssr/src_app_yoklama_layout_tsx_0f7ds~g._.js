@@ -1,0 +1,3 @@
+module.exports=[40951,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)("div",{className:"min-h-screen bg-zinc-950 font-[family-name:var(--font-geist-sans)] text-zinc-100",children:a})},"metadata",0,{title:"Yoklama | Yeter La",description:"Telegram yoklama izleme paneli",robots:{index:!1,follow:!1}}])},57003,a=>{a.n(a.i(40951))}];
+
+//# sourceMappingURL=src_app_yoklama_layout_tsx_0f7ds~g._.js.map

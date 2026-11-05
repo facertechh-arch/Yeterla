@@ -16,9 +16,9 @@ export default function ManifestoView() {
 
   return (
     <div className="w-full flex flex-col space-y-8 select-none">
-      <div className="flex items-center justify-between border-b-2 border-dashed border-zinc-800 pb-4">
+      <div className="flex items-center justify-between border-b border-zinc-900 pb-4">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#FF003C] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
           <span className="font-mono text-xs font-black tracking-widest text-zinc-500 uppercase">
             MİSYON & MANİFESTO
           </span>
@@ -61,16 +61,16 @@ export default function ManifestoView() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className={`relative border-2 p-5 transition-all duration-300 ${
+              className={`relative border p-5 transition-all duration-300 ${
                 isEditMode
-                  ? "border-[#FF003C]/40 bg-zinc-950/40 hover:border-[#FF003C] hover:bg-zinc-950/90"
+                  ? "border-white/20 bg-zinc-950/40 hover:border-white/40"
                   : "border-zinc-900 bg-transparent hover:border-zinc-800"
               }`}
             >
-              <div className="font-mono text-[10px] text-zinc-600 font-bold mb-3 uppercase tracking-wider flex justify-between items-center">
-                <span>// paragraf {String(index + 1).padStart(2, "0")}</span>
+              <div className="font-mono text-[10px] text-zinc-700 font-bold mb-3 uppercase tracking-wider flex justify-between items-center">
+                <span>// bölüm {String(index + 1).padStart(2, "0")}</span>
                 {isEditMode && (
-                  <span className="text-[#FF003C] animate-pulse">düzenlenebilir</span>
+                  <span className="text-zinc-500 animate-pulse">düzenlenebilir</span>
                 )}
               </div>
 

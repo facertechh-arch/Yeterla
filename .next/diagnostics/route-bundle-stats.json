@@ -1,0 +1,87 @@
+[
+  {
+    "route": "/",
+    "firstLoadUncompressedJsBytes": 986231,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\16d5fdub8nsgn.js",
+      ".next\\static\\chunks\\0h1apovhqqwb7.js",
+      ".next\\static\\chunks\\0cilgwjxf10ne.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  },
+  {
+    "route": "/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi",
+    "firstLoadUncompressedJsBytes": 670919,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\0fdp3yy8-k~9s.js",
+      ".next\\static\\chunks\\0cilgwjxf10ne.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  },
+  {
+    "route": "/gelecek",
+    "firstLoadUncompressedJsBytes": 649112,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\0onux7fx9wyfi.js",
+      ".next\\static\\chunks\\0cilgwjxf10ne.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  },
+  {
+    "route": "/_not-found",
+    "firstLoadUncompressedJsBytes": 514647,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  },
+  {
+    "route": "/admin",
+    "firstLoadUncompressedJsBytes": 514647,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  },
+  {
+    "route": "/yoklama",
+    "firstLoadUncompressedJsBytes": 514647,
+    "firstLoadChunkPaths": [
+      ".next\\static\\chunks\\01xlw8hd842-c.js",
+      ".next\\static\\chunks\\0d3shmwh5_nmn.js",
+      ".next\\static\\chunks\\15xrurgzs99gv.js",
+      ".next\\static\\chunks\\0dgq26a5_oy.a.js",
+      ".next\\static\\chunks\\07lhk_q6pmm3r.js",
+      ".next\\static\\chunks\\0x~d-uw7zrjqi.js",
+      ".next\\static\\chunks\\turbopack-0jlc~x6ixufl0.js"
+    ]
+  }
+]
