@@ -46,6 +46,8 @@ const jsonLd = {
       mainEntityOfPage: { "@type": "WebPage", "@id": PAGE_URL },
       articleSection: ARTICLE.category,
       keywords: ARTICLE.keywords.join(", "),
+      /** İçeriğin kaynağı: bu dosya tamamen insan tarafından yazılmıştır. */
+      creativeWorkStatus: ARTICLE.origin,
       dateModified: ARTICLE.lastUpdated,
       author: {
         "@type": "Organization",
@@ -56,7 +58,7 @@ const jsonLd = {
         "@type": "Organization",
         name: "Yeter La",
         url: SITE_URL,
-        logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.ico` },
+        logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.svg` },
       },
       isPartOf: {
         "@type": "CollectionPage",

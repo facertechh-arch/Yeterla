@@ -26,18 +26,104 @@ const TOPICS = [
     href: "/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi"
   },
   {
-    id: "dijital-ozgurluk",
-    title: "2) Dijital Özgürlük ve Sansür",
-    desc: "İnternetin geleceği ve bağımsız iletişim ağlarının önemi.",
-    date: "Hazırlanıyor",
+    id: "sahiplik-kontrol",
+    title: "2) Sahiplik ile kontrol arasındaki fark",
+    desc: "Mülkiyet, kontrol ve erişim: bir şirket sahip olmadığı bir teknolojiyi nasıl kontrol edebilir?",
+    date: "AÇIK",
+    active: true,
+    href: "/gelecek/sahiplik-ile-kontrol-arasindaki-fark"
+  },
+  {
+    id: "devlet-demokrasi",
+    title: "3) Devlet ve demokrasi",
+    desc: "Devletin işleyişi, demokrasinin geleceği ve karar alma süreçlerinde vatandaşın rolü.",
+    date: "YAKINDA",
+    active: false,
+    href: "#"
+  },
+  {
+    id: "egitim-gelisim",
+    title: "4) Eğitim ve insanın gelişimi",
+    desc: "Eğitim sisteminin dönüşümü ve insanın gelişimini destekleyen yeni öğrenme modelleri.",
+    date: "YAKINDA",
+    active: false,
+    href: "#"
+  },
+  {
+    id: "toplum-iliskiler",
+    title: "5) Toplum ve insan ilişkileri",
+    desc: "Toplumsal bağlar, dayanışma ve insan ilişkilerinin gelecekte alacağı biçim.",
+    date: "YAKINDA",
+    active: false,
+    href: "#"
+  },
+  {
+    id: "kaynaklar-enerji",
+    title: "6) Kaynaklar, enerji ve yaşam koşulları",
+    desc: "Kaynakların dağılımı, enerji dönüşümü ve yaşam koşullarının sürdürülebilirliği.",
+    date: "YAKINDA",
     active: false,
     href: "#"
   }
 ];
 
+const SITE_URL = "https://yeterla.com";
+const PAGE_URL = `${SITE_URL}/gelecek`;
+
+/**
+ * Dizin sayfası için yapılandırılmış veri: bu sayfanın bir "koleksiyon"
+ * olduğunu, altındaki analiz dosyalarının listesini ve gezinme yolunu
+ * arama motorlarına ve yapay zekâ botlarına anlatır.
+ */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${PAGE_URL}#page`,
+      "name": "Gelecek Analizleri",
+      "url": PAGE_URL,
+      "inLanguage": "tr-TR",
+      "description":
+        "Gelecekte karşılaşacağımız sorunları ve çözüm yollarını konu konu ele alan analiz dosyaları.",
+      "isPartOf": { "@id": `${SITE_URL}/#website` },
+      "about": { "@id": `${SITE_URL}/#organization` },
+      "breadcrumb": { "@id": `${PAGE_URL}#breadcrumb` }
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${PAGE_URL}#list`,
+      "name": "Gelecek Analizleri dosyaları",
+      "itemListElement": TOPICS.filter((topic) => topic.active).map(
+        (topic, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": topic.title,
+          "description": topic.desc,
+          "url": `${SITE_URL}${topic.href}`
+        })
+      )
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${PAGE_URL}#breadcrumb`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": SITE_URL },
+        { "@type": "ListItem", "position": 2, "name": "Gelecek Analizleri", "item": PAGE_URL }
+      ]
+    }
+  ]
+};
+
 export default function FuturePage() {
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-[#FF003C] selection:text-white flex flex-col items-center relative overflow-clip font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* Background elements */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0c0c0e_1px,transparent_1px),linear-gradient(to_bottom,#0c0c0e_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-20" />
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#FF003C]/5 blur-[120px] rounded-full pointer-events-none" />

@@ -10,6 +10,9 @@ export const ARTICLE = {
   readingTime: "8 dk",
   lastUpdated: "2026-11-06",
   lastUpdatedLabel: "06.11.2026",
+  origin: "Tamamen insan tarafından yazılmıştır",
+  originTone: "human" as "human" | "ai",
+  h1: { lead: "YAPAY ZEKA VE", accent: "İŞİN GELECEĞİ" },
   description:
     "Yapay zeka ve otomasyonun önümüzdeki 10-20 yılda meslekleri, insan emeğinin değerini, çalışma saatlerini ve ekonomik bağımsızlığı nasıl dönüştüreceğine dair 6 soruluk stratejik analiz.",
   keywords: [

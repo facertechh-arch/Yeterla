@@ -1,6 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /api/
-Disallow: /yoklama
-
-Sitemap: https://yeterla.com/sitemap.xml

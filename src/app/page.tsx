@@ -23,6 +23,69 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const SITE_URL = "https://yeterla.com";
+
+/**
+ * Ana sayfa için sıkça sorulan sorular yapılandırılmış verisi.
+ *
+ * Yapay zekâ yanıt motorları "Yeter La nedir, nasıl katılınır" gibi sorulara
+ * cevap üretirken bu alanı kullanır; böylece kaynak olarak site gösterilir.
+ */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}/#faq`,
+  "inLanguage": "tr-TR",
+  "isPartOf": { "@id": `${SITE_URL}/#webpage` },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Yeter La nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Yeter La; kurumsal olmayan, merkeziyetsiz ve bağımsız bir gençlik hareketidir. Türkiye'deki gençliğin ortak bir refleksle birleşerek somut ve organize eylemler düzenlemesini amaçlar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Yeter La'ya nasıl katılabilirim?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Sitedeki katılım bölümünden Signal gruplarına katılarak veya yeterla02@proton.me adresine yazarak harekete dahil olabilirsin. Herkes YeterLa adına sosyal medya hesabı açabilir ve bağımsız proje üretebilir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Yeter La merkezi bir yapı mı?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Hayır. Belirli bir lider ya da imtiyazlı bir zümre yoktur. Gençler kendi yerel hücrelerini, gruplarını veya topluluklarını kurar; bu yapılar Yeter La şemsiyesi altında dirsek teması hâlinde kalır ve hiyerarşik bir emir-komuta zinciri gerekmez."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Yeter La manifestoyu nasıl ele alıyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Manifesto sabit değildir; yaşayan ve değiştirilebilir bir metindir. Katılımcılar manifesto alanında görüş yazabilir, değişiklik önerisi bırakabilir ve ortak metnin gelişimine katkı sunabilir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Yeter La hangi platformlarda örgütleniyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text":
+          "Bağımsız gruplar, iletişim ağlarını Telegram ve Signal kanalları üzerinden koordine eder; ortak refleks noktalarında birleşerek eş zamanlı hareket eder."
+      }
+    }
+  ]
+};
+
 const WORKFLOW_ADVANTAGES = [
   {
     title: "Süreklilik ve direnç",
@@ -205,6 +268,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#060608] text-white selection:bg-white selection:text-black flex flex-col items-center justify-between relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       
       {/* Sticky Navigation Header */}
       <header className="sticky top-0 w-full bg-black/95 backdrop-blur-md border-b border-zinc-900 z-30 select-none">

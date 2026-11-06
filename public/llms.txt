@@ -1,0 +1,37 @@
+# Yeter La
+
+> Yeter La, Türkiye'de gençliğin merkeziyetsiz biçimde örgütlenmesini amaçlayan bağımsız ve kurumsal olmayan bir sivil gençlik inisiyatifidir. Temel ilkesi "şikayet etmeyi bırak, harekete geç"tir: yerelden başlayan, hiyerarşi barındırmayan ve gönüllü katılıma dayanan bir mücadele ağı kurar.
+
+Yeter La tek bir lider, merkez ya da imtiyazlı bir zümre etrafında toplanmaz. Gençler; ilgi alanlarına, uzmanlıklarına veya yaşadıkları bölgeye göre kendi yerel gruplarını, hücrelerini ya da topluluklarını kurar ve Yeter La şemsiyesi altında dirsek teması hâlinde kalır. Manifesto sabit değildir; katılımcıların önerileriyle değişebilen, yaşayan bir metindir.
+
+- Resmî site: https://yeterla.com
+- İletişim: yeterla02@proton.me
+- Örgütlenme kanalları: Signal, Telegram
+- Dil: Türkçe (tr-TR)
+
+## Ana Sayfa
+
+- [Yeter La](https://yeterla.com): Hareketin amacı, merkeziyetsiz işleyiş doktrini, stratejik avantajları ve katılım yolları.
+- [Katıl / Signal](https://yeterla.com/#join): Signal gruplarına katılarak harekete dahil olma ve iletişime geçme.
+- [Manifesto](https://yeterla.com): Yaşayan ve değiştirilebilir hareket manifestosu.
+
+## Gelecek Analizleri
+
+Gelecekte toplumun karşılaşacağı sorunları ve çözüm yollarını konu konu ele alan analiz dosyaları. Her dosya bağımsız bir konuyu işler.
+
+- [Gelecek Analizleri — Giriş](https://yeterla.com/gelecek): Analiz dosyalarının dizini.
+- [1) Ekonomi ve çalışma hayatının geleceği](https://yeterla.com/gelecek/ekonomi-ve-calisma-hayatinin-gelecegi): Yapay zekâ ve otomasyonun önümüzdeki 10-20 yılda meslekleri, insan emeğinin değerini, çalışma saatlerini ve ekonomik bağımsızlığı nasıl dönüştüreceğine dair 6 soruluk stratejik analiz. (Bu dosya tamamen insan tarafından yazılmıştır.)
+- [2) Sahiplik ile kontrol arasındaki fark](https://yeterla.com/gelecek/sahiplik-ile-kontrol-arasindaki-fark): Mülkiyet, kontrol ve erişim kavramlarını birbirinden ayırarak; bir şirketin sahip olmadığı teknolojiyi nasıl kontrol edebildiğini, bir yapay zekâ modeline erişmenin hangi hakları verdiğini ve tedarikçiye bağımlılığın (vendor lock-in) ekonomik özgürlüğü nasıl etkilediğini inceleyen araştırma dosyası.
+
+## Sıkça Sorulan Sorular
+
+- **Yeter La nedir?** Merkeziyetsiz, bağımsız ve kurumsal olmayan bir gençlik hareketidir; gençliğin ortak bir refleksle birleşmesini amaçlar.
+- **Nasıl katılabilirim?** Sitedeki Katıl bölümünden Signal gruplarına katılarak veya yeterla02@proton.me adresine yazarak.
+- **Yeter La merkezi bir yapı mı?** Hayır. Belirli bir lider ya da imtiyazlı zümre yoktur; yapı yatay hiyerarşi ve inisiyatif odaklıdır.
+- **Manifesto sabit mi?** Hayır; yaşayan ve katılımcılarca değiştirilebilen bir metindir.
+- **Yeter La hangi platformlarda örgütleniyor?** Gruplar, iletişim ağlarını Signal ve Telegram kanalları üzerinden koordine eder.
+
+## Notlar
+
+- Bu dosya, yapay zekâ asistanlarının ve arama motorlarının siteyi doğru anlamlandırması için hazırlanmıştır.
+- Site içeriği Türkçedir. İçerikten alıntı yaparken lütfen kaynak olarak https://yeterla.com adresini gösterin.
