@@ -58,6 +58,9 @@ export type ArticleShellProps = {
   children: ReactNode;
 };
 
+/** Makale başındaki özet panelinin sayfa içi çapa kimliği */
+const SUMMARY_ID = "ozet";
+
 const ORIGIN_STYLES: Record<OriginTone, { wrap: string; dot: string }> = {
   human: {
     wrap: "border-emerald-900/60 bg-emerald-950/25 text-emerald-300/90",
@@ -127,6 +130,9 @@ export default function ArticleShell({
       const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     });
+
+    const summaryEl = document.getElementById(SUMMARY_ID);
+    if (summaryEl) observer.observe(summaryEl);
 
     return () => observer.disconnect();
   }, [sections]);
@@ -198,6 +204,17 @@ export default function ArticleShell({
               <div className="h-px w-full bg-zinc-900" />
             </div>
             <nav className="flex flex-col gap-1">
+              <button
+                onClick={() => scrollToSection(SUMMARY_ID)}
+                className={`flex items-start gap-3 border-l-2 px-4 py-3 text-left text-sm font-bold tracking-wide uppercase transition-all ${
+                  activeId === SUMMARY_ID
+                    ? "border-[#FF003C] bg-zinc-900/50 text-white"
+                    : "border-transparent text-ink-faint hover:bg-zinc-900/30 hover:text-zinc-300"
+                }`}
+              >
+                <span className="pt-0.5 font-mono text-[10px] text-[#FF003C]/70">◆</span>
+                <span>Özet</span>
+              </button>
               {sections.map((s, i) => (
                 <button
                   key={s.id}
@@ -233,6 +250,12 @@ export default function ArticleShell({
                   Sorular
                 </span>
                 <nav className="flex flex-col gap-4">
+                  <button
+                    onClick={() => scrollToSection(SUMMARY_ID)}
+                    className="flex items-center justify-between border-b border-zinc-900 py-4 text-left text-xl font-bold text-zinc-200"
+                  >
+                    ÖZET <ChevronRight className="h-5 w-5 shrink-0 text-[#FF003C]" />
+                  </button>
                   {sections.map((s) => (
                     <button
                       key={s.id}
@@ -291,12 +314,14 @@ export default function ArticleShell({
                 {origin}
               </span>
 
-              <ArticleSummary
-                eyebrow={summary.eyebrow}
-                title={summary.title}
-                points={summary.points}
-                fontClassName={spaceGrotesk.className}
-              />
+              <div id={SUMMARY_ID} className="scroll-mt-28">
+                <ArticleSummary
+                  eyebrow={summary.eyebrow}
+                  title={summary.title}
+                  points={summary.points}
+                  fontClassName={spaceGrotesk.className}
+                />
+              </div>
             </header>
 
             {children}

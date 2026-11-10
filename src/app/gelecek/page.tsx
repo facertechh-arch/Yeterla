@@ -37,9 +37,9 @@ const TOPICS = [
     id: "devlet-demokrasi",
     title: "3) Devlet ve demokrasi",
     desc: "Devletin işleyişi, demokrasinin geleceği ve karar alma süreçlerinde vatandaşın rolü.",
-    date: "YAKINDA",
-    active: false,
-    href: "#"
+    date: "AÇIK",
+    active: true,
+    href: "/gelecek/devlet-ve-demokrasi"
   },
   {
     id: "egitim-gelisim",
@@ -159,7 +159,14 @@ export default function FuturePage() {
             transition={{ delay: 0.1 }}
             className={`${spaceGrotesk.className} text-zinc-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed`}
           >
-            Sistem şöyle işleyecek: Gelecekte karşılaşacağımız sorunları ve çözüm yollarını konu konu burada depolayacağız.
+            Eğer biz önümüzdeki engelleri görüp bunlara çözüm bulmazsak bizden başkaları gelecekte
+            bizim düşeceğimiz sıkıntıları kendi iyiliklerine kullanıp diğer nesillerde olduğu gibi
+            bizim geleceğimizi yok edebilir.
+            <br />
+            <br />
+            Bu klasörler, sorular ve cevaplar bunun için var.
+            <br />
+            <span className="text-white font-bold">İyi okumalar.</span>
           </motion.p>
         </div>
 
@@ -219,14 +226,6 @@ export default function FuturePage() {
                 </div>
               </motion.div>
             </Link>
-          ))}
-          
-          {/* Add more placeholder folders if needed to show grid */}
-          {[1, 2].map((n) => (
-            <div key={n} className="opacity-20 pointer-events-none pt-4">
-              <div className="absolute top-0 left-0 w-16 h-4 bg-zinc-900 rounded-t-lg" />
-              <div className="bg-zinc-950 border border-zinc-900 aspect-[4/5] rounded-b-lg" />
-            </div>
           ))}
         </div>
       </div>

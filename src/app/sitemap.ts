@@ -28,5 +28,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: 'https://yeterla.com/gelecek/devlet-ve-demokrasi',
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
   ];
 }
